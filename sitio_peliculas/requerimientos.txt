@@ -1,3 +1,6 @@
 npm i popper.js@1.14.3
 npm install bootstrap
 npm i jquery
+npm i semantic-ui-react
+npm install @material-ui/icons
+npm install @material-ui/core

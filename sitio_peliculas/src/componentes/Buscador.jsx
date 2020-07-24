@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 class Buscador extends Component{
 
+
     busquedaRef= React.createRef();
     obtenerDatos = (e)=>{
         e.preventDefault();
@@ -10,11 +11,11 @@ class Buscador extends Component{
     }
     render(){
         return (
-            <form onSubmit={this.obtenerDatos}>
+            <form onSubmit={handleSubmit}>
                 
                 <div className="row">
                     <div className="form-group col-md-8">
-                        <input ref={this.busquedaRef} type="text" className="form-control form-control-lg" placeholder="Busca tu pelicula. Ejemplo: Godfather"/>
+                        <input ref={this.busquedaRef} type="text" className="form-control form-control-lg" placeholder="Busca tu pelicula. Ejemplo: Godfather" onChange={handleChange}/>
                     </div>
                     <div className="form-group col-md-4">
                         <input type="submit" className="btn btn--lg btn-block btn-info btn-mio" color="inherit" value="Buscar"/>

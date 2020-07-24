@@ -29,9 +29,10 @@ class SitoPelicula extends Component{
         this.state={
           termino:'',
           imagenes: [],
+          peliculas: [],
           pagina: ''
         }
-    
+        this.apiKey = process.env.REACT_APP_API
       }
       
       scroll =()=>{
@@ -83,14 +84,27 @@ class SitoPelicula extends Component{
         })
       }
 
-
+      handleSubmit = (e) => {
+        e.preventDefault();
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.state.termino}`)
+        .then(data => data.json())
+        .then(data => {
+          console.log(data);
+          this.setState({
+            peliculas: [...data.results]
+          })
+        })
+      }
+      handleChange = (e) => {
+        this.setState({termino: e.target.value})
+      }
 
     
     render(){
         return (
             <>
             <BarraNavegacion/>
-            <Buscador datosBusqueda={this.datosBusqueda}/>
+            <Buscador handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
             <Grid className="fondo">
                 <Grid.Column className="grillaCarrito col-4 col-xs-4 col-sm-3 col-md-3 col-lg-3">
                     <Lista/>

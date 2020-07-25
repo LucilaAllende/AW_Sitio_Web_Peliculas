@@ -86,19 +86,23 @@ class SitoPelicula extends Component{
 
       handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.state.termino}`)
-        .then(data => data.json())
-        .then(data => {
-          console.log(data);
-          this.setState({
-            peliculas: [...data.results]
+        if (e.target.inputBuscador.value){
+          fetch(`https://api.themoviedb.org/3/search/movie?api_key=f4ebf0475efbb7e569cbca44092c1d11&query=${this.state.termino}`)
+          .then(data => data.json())
+          .then(data => {
+            if (data){
+              this.setState({
+                peliculas: [...data.results],
+                imagenes: data.results
+              })
+            }
           })
-        })
+        }
       }
+
       handleChange = (e) => {
         this.setState({termino: e.target.value})
       }
-
     
     render(){
         return (

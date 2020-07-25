@@ -11,11 +11,11 @@ class Buscador extends Component{
     }
     render(){
         return (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={this.props.handleSubmit}>
                 
                 <div className="row">
                     <div className="form-group col-md-8">
-                        <input ref={this.busquedaRef} type="text" className="form-control form-control-lg" placeholder="Busca tu pelicula. Ejemplo: Godfather" onChange={handleChange}/>
+                        <input id="inputBuscador" ref={this.busquedaRef} type="text" className="form-control form-control-lg" placeholder="Busca tu pelicula. Ejemplo: Godfather" onChange={this.props.handleChange}/>
                     </div>
                     <div className="form-group col-md-4">
                         <input type="submit" className="btn btn--lg btn-block btn-info btn-mio" color="inherit" value="Buscar"/>

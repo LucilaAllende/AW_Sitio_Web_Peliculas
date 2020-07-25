@@ -10,16 +10,17 @@ class Resultado extends Component{
         if(imagenes.length===0){
             return null;
         } 
+        console.log("IMAGENES")
         console.log(imagenes);
 
         return (
             <React.Fragment>
                 <div className="col-s12 p-5 row">
                     {
-                        imagenes.map(imagen=>(
+                        imagenes.map((imagen, i)=>(
                             <Imagen
-                            key={imagen.id}
-                            imagen={imagen}
+                            key={i}
+                            imagen={imagen.poster_path}
                             />
                         ))
                     }

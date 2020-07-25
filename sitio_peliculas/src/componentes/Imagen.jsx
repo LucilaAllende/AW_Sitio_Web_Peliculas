@@ -1,21 +1,19 @@
 import React from 'react';
 
 const Imagen = (props) =>{
-    const {
-        largeImageURL,
-        likes,
-        previewURL,
-        tags,
-        views
-    } = props.imagen;
+    console.log("props")
+    console.log(props)
+    console.log(props.imagen)
+    
     return (
     <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
         <div className="card">
-            <img src={previewURL} alt={tags} className="card-img-top"/>
             <div className="card-body">
-            <p className="card-text">{likes} Me gusta</p>
-            <p className="card-text">{views} Vistas</p>
-            <a href={largeImageURL} target="_blank" className="btn btn-primary btn-block">Ver imagen</a>
+                <div className="card-image waves-effect waves-block waves-light">
+                    {
+                    props.imagen == null ? <img src={`https://s3-ap-southeast-1.amazonaws.com/upcode/static/default-image.jpg`} alt="card image" style={{width: "1004", height: 360}}/> : <img src={`http://image.tmdb.org/t/p/w185${props.imagen}`} alt="card image" style={{width: "1004", height: 360}}/>
+                    }
+                </div>
             </div>
         </div>
     </div>

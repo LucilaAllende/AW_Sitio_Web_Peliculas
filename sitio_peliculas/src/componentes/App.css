@@ -6,7 +6,7 @@
 }
 
 .fondo{
-  background: #F3E7E7;
+  background: #3b5cc9;
   margin-top: -10px;
 }
 
@@ -59,4 +59,10 @@
 	bottom:114px;
   left:25px;
   z-index: 0;
+}
+
+.agregar-margen{
+  margin-top: 25px;
+  margin-left: 30px;
+  margin-right: 10px;
 }

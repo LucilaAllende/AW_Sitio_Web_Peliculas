@@ -5,39 +5,34 @@ import Lista from './Lista';
 import Resultado from './Resultado'
 import {Grid} from 'semantic-ui-react';
 import './App.css'
-
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-  }));
-  
+import 'react-pro-sidebar/dist/css/styles.css';
+import Sidebar from "react-sidebar";
+import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
 
 class SitoPelicula extends Component{
-
+  
     constructor(){
         super();
         this.state={
           termino:'',
           imagenes: [],
           peliculas: [],
-          pagina: ''
+          pagina: '',
+          sidebarOpen: false
         }
         this.apiKey = process.env.REACT_APP_API
+        this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+
       }
       
       scroll =()=>{
         const elemento= document.querySelector('.jumbotron');
         elemento.scrollIntoView({block: "start", behavior: "smooth"});
+      }
+
+      onSetSidebarOpen(open) {
+        this.setState({ sidebarOpen: open });
       }
     
       paginaAnterior = ()=>{   
@@ -107,13 +102,18 @@ class SitoPelicula extends Component{
     render(){
         return (
             <>
-            <BarraNavegacion/>
+            <Sidebar
+              sidebar={<Lista/>}
+              open={this.state.sidebarOpen}
+              onSetOpen={this.onSetSidebarOpen}
+              styles={{ sidebar: { background: "white" } }}
+            >
+            </Sidebar>
+            <BarraNavegacion onSetSidebarOpen = {this.onSetSidebarOpen} />
             <Buscador handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
+
             <Grid className="fondo">
-                <Grid.Column className="grillaCarrito col-4 col-xs-4 col-sm-3 col-md-3 col-lg-3">
-                    <Lista/>
-                </Grid.Column>
-                <Grid.Column className="grillaCatalogo col-6 col-xs-6 col-sm-8 col-md-8 col-lg-8" >
+                <Grid.Column className="col-6 col-xs-6 col-sm-8 col-md-8 col-lg-8" >
                 <div className="row justify-content-center">
                     <Resultado 
                     imagenes={this.state.imagenes} 

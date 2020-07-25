@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
 class Buscador extends Component{
+
+    useStyles = makeStyles((theme) => ({
+        buscador:{
+            marginTop: 45,
+        }
+      }));
 
     busquedaRef= React.createRef();
     obtenerDatos = (e)=>{
@@ -8,17 +16,19 @@ class Buscador extends Component{
         const termino = this.busquedaRef.current.value;
         this.props.datosBusqueda(termino);
     }
+
     render(){
         return (
-            <form onSubmit={this.obtenerDatos}>
-                
+            <form onSubmit={this.obtenerDatos} className="agregar-margen center">                
                 <div className="row">
                     <div className="form-group col-md-8">
                         <input ref={this.busquedaRef} type="text" className="form-control form-control-lg" placeholder="Busca tu pelicula. Ejemplo: Godfather"/>
                     </div>
                     <div className="form-group col-md-4">
-                        <input type="submit" className="btn btn--lg btn-block btn-info btn-mio" color="inherit" value="Buscar"/>
-                    </ div>
+                        <Button variant="contained" color="primary" type="submit">
+                            Buscar
+                        </Button>
+                    </ div>  
                 </div>
             </form>
         );

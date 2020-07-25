@@ -1,100 +1,16 @@
+import React, {Component} from 'react';
 import Buscador from './Buscador';
+import BarraNavegacion from './BarraNavegacion';
 import Lista from './Lista';
 import Resultado from './Resultado'
-
-import React, {Component} from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import {Grid} from 'semantic-ui-react';
+import './App.css'
+import 'react-pro-sidebar/dist/css/styles.css';
+import Sidebar from "react-sidebar";
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  loginButton: {
-      align: 'flex-end',
-      marginLeft: 1050,
-      marginRight: -12,
-  },
-  sectionDesktop: {
-    display: 'none',
-    alignItems: 'flex-end',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-}));
-
-class SitioPeliculas extends Component {
+class SitoPelicula extends Component{
 
     constructor(){
         super();
@@ -102,104 +18,93 @@ class SitioPeliculas extends Component {
           termino:'',
           imagenes: [],
           pagina: '',
-          open: false,
+          sidebarOpen: false
         }
+        this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
     
       }
+      
+      scroll =()=>{
+        const elemento= document.querySelector('.jumbotron');
+        elemento.scrollIntoView({block: "start", behavior: "smooth"});
+      }
 
-    classes = () => {
-        useStyles();
-    }
+      onSetSidebarOpen(open) {
+        this.setState({ sidebarOpen: open });
+      }
+    
+      paginaAnterior = ()=>{   
+        console.log("paginaAnterior");
+        let pagina= this.state.pagina; //leer el state de la pagina actual 
+        if(pagina>1){ //si la pagina es uno ya no ir hacia atras
+          pagina-=1; //restar uno a la pagina actual
+          this.setState({pagina}, //agregar el cambio al state
+            ()=>{
+              this.consultarApi();
+              this.scroll();
+            });
+        }
+        
+      }
 
-    theme = () => {
-        useTheme();
-    }
+      paginaSiguiente = () => {
+       
+        console.log("paginaSiguiente");
+        let pagina= this.state.pagina; //leer el state de la pagina actual 
+        pagina++; //sumar uno a la pagina actual
+        this.setState({pagina}, //agregar el cambio al state
+          ()=>{this.consultarApi()
+            this.scroll();
+          });
+      }
+    
+      consultarApi = ()=>{
+        const pagina= this.state.pagina;
+        const termino= this.state.termino;
+        const url= `https://pixabay.com/api/?key=1680832-74d43234194527aae929c2be5&q=${termino}&per_page=30&page=${pagina}`;
+        
+        fetch(url)
+        .then(respuesta => respuesta.json())
+        .then(resultado => this.setState({imagenes:resultado.hits}));
+      }
+    
+      datosBusqueda = (termino) =>{
+        this.setState({
+          termino,
+          pagina:1
+        },()=>{
+          this.consultarApi();
+        })
+      }
 
-    setOpen = (bandera) => {
-        this.setState({open: bandera});
-    }
-
-    handleDrawerOpen = () => {
-        this.setOpen(true);
-    };
-
-    handleDrawerClose = () => {
-        this.setOpen(false);
-    };
-
+    
     render(){
         return (
-            <div className={this.classes.root}>
-                <CssBaseline />
-                <AppBar
-                    position="fixed"
-                    className={clsx(this.classes.appBar, {
-                    [this.classes.appBarShift]: this.state.open,
-                    })}
-                >
-                    <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={this.handleDrawerOpen}
-                        edge="start"
-                        className={clsx(this.classes.menuButton, this.state.open && this.classes.hide)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Persistent drawer
-                    </Typography>
-                    <div className={this.classes.sectionDesktop}>
-                        <Button color="inherit" className={this.classes.loginButton}>Login</Button>
-                    </div>         
-                    </Toolbar>
-                </AppBar>
-                <Drawer
-                    className={this.classes.drawer}
-                    variant="persistent"
-                    anchor="left"
-                    open={this.state.open}
-                    classes={{
-                    paper: this.classes.drawerPaper,
-                    }}
-                >
-                    <div className={this.classes.drawerHeader}>
-                    <IconButton onClick={this.handleDrawerClose}>
-                        {this.theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                    </div>
-                    <Divider />
-                    <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                    </List>
-                    <Divider />
-                    <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                    </List>
-                </Drawer>
-                <main
-                    className={clsx(this.classes.content, {
-                    [this.classes.contentShift]: this.state.open,
-                    })}
-                >
-                    <div className={this.classes.drawerHeader} />
-                    <Buscador/>
-                        HOLAAAAA
-                </main>
-            </div>
+            <>
+            <Sidebar
+              sidebar={<Lista/>}
+              open={this.state.sidebarOpen}
+              onSetOpen={this.onSetSidebarOpen}
+              styles={{ sidebar: { background: "white" } }}
+            >
+            </Sidebar>
+            <BarraNavegacion onSetSidebarOpen = {this.onSetSidebarOpen} />
+            <Buscador datosBusqueda={this.datosBusqueda}/>
+
+            <Grid className="fondo">
+                <Grid.Column className="col-6 col-xs-6 col-sm-8 col-md-8 col-lg-8" >
+                <div className="row justify-content-center">
+                    <Resultado 
+                    imagenes={this.state.imagenes} 
+                    paginaAnterior={this.paginaAnterior}
+                    paginaSiguiente={this.paginaSiguiente}
+                    />
+                </div>                   
+                </Grid.Column>
+            </Grid> 
+          </>
         );
-    }  
+    }
 }
 
-export default SitioPeliculas;
+export default SitoPelicula;

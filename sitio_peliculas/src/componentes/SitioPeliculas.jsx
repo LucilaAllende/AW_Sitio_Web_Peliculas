@@ -23,6 +23,7 @@ class SitoPelicula extends Component{
           sidebarOpen: false,
           totalResultados: 0,
           paginaActual: 1,
+          listaPeliculas: []
         }
         this.apiKey = process.env.REACT_APP_API
         this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
@@ -117,6 +118,41 @@ class SitoPelicula extends Component{
             }
           })
       }
+
+      handleGuardarProducto(productId) {
+    
+        //busco el producto en mi lista de productos
+        let producto = this.state.products.find(elemProducto => elemProducto.id === productId);
+        let indexProducto = this.state.products.findIndex(x => x.id === producto.id)
+    
+        var productoCarrrito = {
+          id: producto.id,
+          nombre: producto.nombre,
+          img: producto.imagen,
+          precio: producto.precio,
+          cantidad: 1,
+          total: producto.precio
+        }
+        //verifico si el producto esta o no en el carrito
+        var existe = this.state.carrito.find(elemProducto => elemProducto.id === productId)
+        if (undefined !== existe && existe !== null) {
+          let indexCarrito = this.state.carrito.findIndex(x => x.id === existe.id)
+          this.handlerAgregarProducto(indexCarrito, indexProducto)    
+        }else{
+          var copiaState = Object.assign({}, this.state);
+          copiaState.products[indexProducto].stock -= 1
+          copiaState.total += 1
+          this.setState({total: copiaState.total})
+          copiaState.sum += copiaState.products[indexProducto].precio
+          this.setState({sum: copiaState.sum})
+          this.setState({
+            carrito: this.state.carrito.concat([productoCarrrito]),
+            copiaState
+          })
+        }
+    
+      }
+
     render(){
         return (
             <>
@@ -131,7 +167,7 @@ class SitoPelicula extends Component{
             <Buscador handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
             <Grid>
                 <Grid.Column className="col-12 fondo" >
-                <div className="row justify-content-center">
+                <div className="row justify-content-center resultado">
                     <Resultado 
                     imagenes={this.state.imagenes} 
                     paginaAnterior={this.paginaAnterior}

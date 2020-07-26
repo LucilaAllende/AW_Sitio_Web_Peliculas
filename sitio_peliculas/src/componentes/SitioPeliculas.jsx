@@ -118,7 +118,7 @@ class SitoPelicula extends Component{
           <Grid.Column className="col-12 fondo" >
           <div className="row justify-content-center resultado">
             <Resultado 
-            imagenes={this.state.imagenes}
+            peliculas={this.state.peliculas}
             totalResultados={this.state.totalResultados}
             paginaActual={this.state.paginaActual}
             numeroPaginas = {numeroPaginas}

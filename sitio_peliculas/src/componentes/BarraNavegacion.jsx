@@ -6,6 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+//import MenuItem from '@material-ui/core/MenuItem';
+
+import Login from './Login'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +26,16 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar(props) {
   const classes = useStyles();
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -37,7 +51,20 @@ export default function ButtonAppBar(props) {
           <Typography variant="h6" className={classes.title}>
             Sitio Peliculas
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button 
+            aria-controls="simple-menu" 
+            aria-haspopup="true" 
+            onClick={handleClick}
+            color="inherit">Login</Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+              <Login/>
+          </Menu>
         </Toolbar>
       </AppBar>
     </div>

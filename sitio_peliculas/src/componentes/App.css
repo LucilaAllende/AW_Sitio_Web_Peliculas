@@ -32,6 +32,25 @@
   margin:auto;
 }
 
+.elemento-lista-paginacion-prev{
+  background: #e5e8e8;
+  margin-left: 2px;
+  border: #e5e8e8;
+}
+
+.elemento-lista-paginacion{
+  background: #e5e8e8;
+  margin-right: 2px;
+  margin-left: 2px;
+  border: #024959;
+}
+
+.elemento-lista-paginacion-next{
+  background: #e5e8e8;
+  margin-right: 2px;
+  border: #024959;
+}
+
 .cardProducto{
   background: #e5e8e8 ;
   background-color: #e5e8e8;

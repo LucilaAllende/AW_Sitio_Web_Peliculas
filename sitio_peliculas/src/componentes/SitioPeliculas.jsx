@@ -19,15 +19,18 @@ class SitoPelicula extends Component{
           imagenes: [],
           peliculas: [],
           pagina: '',
-          sidebarOpen: false
+          sidebarOpen: false,
+          totalResultados: 0,
+          paginaActual: 1,
         }
         this.apiKey = process.env.REACT_APP_API
         this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-
       }
       
       scroll =()=>{
         const elemento= document.querySelector('.jumbotron');
+        console.timeLog("-----------------")
+        console.log(elemento)
         elemento.scrollIntoView({block: "start", behavior: "smooth"});
       }
 
@@ -88,7 +91,8 @@ class SitoPelicula extends Component{
             if (data){
               this.setState({
                 peliculas: [...data.results],
-                imagenes: data.results
+                imagenes: data.results,
+                totalResultados: data.total_results
               })
             }
           })
@@ -99,6 +103,19 @@ class SitoPelicula extends Component{
         this.setState({termino: e.target.value})
       }
     
+      nextPage = (numeroPagina) =>{
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=f4ebf0475efbb7e569cbca44092c1d11&query=${this.state.termino}&page=${numeroPagina}`)
+          .then(data => data.json())
+          .then(data => {
+            if (data){
+              this.setState({
+                peliculas: [...data.results],
+                imagenes: data.results,
+                paginaActual: numeroPagina
+              })
+            }
+          })
+      }
     render(){
         return (
             <>

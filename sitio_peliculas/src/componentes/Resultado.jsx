@@ -21,6 +21,12 @@ class Resultado extends Component{
                             <Imagen
                             key={i}
                             imagen={imagen.poster_path}
+                            titulo={imagen.title}
+                            estreno={imagen.release_date}
+                            lenguaje={imagen.original_language}
+                            descripcion={imagen.overview}
+                            popularidad={imagen.popularity}
+                            puntuacion={imagen.vote_average}
                             />
                         ))
                     }

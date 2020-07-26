@@ -10,6 +10,10 @@
   margin-top: -10px;
 }
 
+.pull-right{
+  text-align: right;
+}
+
 .grillaCatalogo{
   margin-left: 20px;
   padding-right: 2px;

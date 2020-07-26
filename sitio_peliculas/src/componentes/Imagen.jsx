@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 
 const Imagen = (props) =>{
     return (
-    <div className="col-md-5">
+    <div className="col-md-4 col-sm-9 col-xs-9 col-md-6 col-lg-4 ">
         <div className="card">
             <div className="card-body">
                 <p><b><big>{props.titulo}</big></b></p>

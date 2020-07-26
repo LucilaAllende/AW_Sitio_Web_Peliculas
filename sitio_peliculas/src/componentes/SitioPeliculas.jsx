@@ -129,9 +129,8 @@ class SitoPelicula extends Component{
             </Sidebar>
             <BarraNavegacion onSetSidebarOpen = {this.onSetSidebarOpen} />
             <Buscador handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
-
             <Grid>
-                <Grid.Column className="col-6 col-xs-6 col-sm-8 col-md-8 col-lg-8 fondo" >
+                <Grid.Column className="col-12 fondo" >
                 <div className="row justify-content-center">
                     <Resultado 
                     imagenes={this.state.imagenes} 

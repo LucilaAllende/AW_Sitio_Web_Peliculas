@@ -7,8 +7,9 @@ import {Grid} from 'semantic-ui-react';
 import './App.css'
 import 'react-pro-sidebar/dist/css/styles.css';
 import Sidebar from "react-sidebar";
-import MenuIcon from '@material-ui/icons/Menu';
-import IconButton from '@material-ui/core/IconButton';
+// import MenuIcon from '@material-ui/icons/Menu';
+// import IconButton from '@material-ui/core/IconButton';
+// import Login from './Login'
 
 class SitoPelicula extends Component{
   
@@ -129,8 +130,8 @@ class SitoPelicula extends Component{
             <BarraNavegacion onSetSidebarOpen = {this.onSetSidebarOpen} />
             <Buscador handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
 
-            <Grid className="fondo">
-                <Grid.Column className="col-6 col-xs-6 col-sm-8 col-md-8 col-lg-8" >
+            <Grid>
+                <Grid.Column className="col-6 col-xs-6 col-sm-8 col-md-8 col-lg-8 fondo" >
                 <div className="row justify-content-center">
                     <Resultado 
                     imagenes={this.state.imagenes} 

@@ -10,6 +10,7 @@ import Menu from '@material-ui/core/Menu';
 //import MenuItem from '@material-ui/core/MenuItem';
 
 import Login from './Login'
+import Registro from './Registro'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,14 +27,24 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar(props) {
   const classes = useStyles();
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorL, setAnchorL] = React.useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleClickL = (event) => {
+    setAnchorL(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleCloseL = () => {
+    setAnchorL(null);
+  };
+
+  const [anchorR, setAnchorR] = React.useState(null);
+
+  const handleClickR = (event) => {
+    setAnchorR(event.currentTarget);
+  };
+
+  const handleCloseR = () => {
+    setAnchorR(null);
   };
 
   return (
@@ -54,16 +65,30 @@ export default function ButtonAppBar(props) {
           <Button 
             aria-controls="simple-menu" 
             aria-haspopup="true" 
-            onClick={handleClick}
+            onClick={handleClickL}
             color="inherit">Login</Button>
+          <Button 
+            aria-controls="registrar-menu" 
+            aria-haspopup="true" 
+            onClick={handleClickR}
+            color="inherit">Registrarme</Button>
           <Menu
             id="simple-menu"
-            anchorEl={anchorEl}
+            anchorEl={anchorL}
             keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
+            open={Boolean(anchorL)}
+            onClose={handleCloseL}
           >
               <Login/>
+          </Menu>
+          <Menu
+            id="registrar-menu"
+            anchorEl={anchorR}
+            keepMounted
+            open={Boolean(anchorR)}
+            onClose={handleCloseR}
+          >
+              <Registro/>
           </Menu>
         </Toolbar>
       </AppBar>

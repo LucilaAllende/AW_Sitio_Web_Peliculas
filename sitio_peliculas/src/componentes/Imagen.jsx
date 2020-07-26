@@ -18,7 +18,7 @@ const Imagen = (props) =>{
                 <p><b>Lenguaje:</b> {props.lenguaje}</p>
                 <p><b>Descripción:</b> {props.descripcion}</p>
                 <Button variant="contained" color="primary" >
-                    Agregar a favoritos
+                    Agregar a Mi Lista
                 </Button>
             </div>
         </div>

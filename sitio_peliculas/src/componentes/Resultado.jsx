@@ -10,9 +10,7 @@ class Resultado extends Component{
         if(imagenes.length===0){
             return null;
         } 
-        console.log("IMAGENES")
-        console.log(imagenes);
-
+        
         return (
             <React.Fragment>
                 <div className="col-s12 p-5 row">
@@ -31,10 +29,9 @@ class Resultado extends Component{
                         ))
                     }
                 </div>
-                <Paginacion 
-                paginaAnterior={this.props.paginaAnterior}
-                paginaSiguiente={this.props.paginaSiguiente}
-                />
+                {this.props.totalResultados > 20 ? <Paginacion nextPage={this.props.nextPage} paginas={this.props.numeroPaginas} paginaSiguiente={this.props.paginaSiguiente} paginaActual={this.props.paginaActual}/>: ''}
+                
+                
             </React.Fragment>
         )
 

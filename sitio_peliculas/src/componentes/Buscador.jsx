@@ -20,7 +20,7 @@ class Buscador extends Component{
     render(){
         return (
             <form onSubmit={this.props.handleSubmit} className="agregar-margen center">
-                <div className="row pull-right">
+                <div className="row">
                     <div className="form-group col-md-8">
                         <input id="inputBuscador" ref={this.busquedaRef} type="text" className="form-control form-control-lg" placeholder="Busca tu pelicula. Ejemplo: Godfather" onChange={this.props.handleChange}/>
                     </div>

@@ -17,13 +17,12 @@ class SitoPelicula extends Component{
         super();
         this.state={
           termino:'',
-          imagenes: [],
           peliculas: [],
           pagina: '',
           sidebarOpen: false,
           totalResultados: 0,
           paginaActual: 1,
-          listaPeliculas: []
+          listaPeliculas: [],
         }
         this.apiKey = process.env.REACT_APP_API
         this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
@@ -49,7 +48,6 @@ class SitoPelicula extends Component{
             if (data){
               this.setState({
                 peliculas: [...data.results],
-                imagenes: data.results,
                 totalResultados: data.total_results
               })
             }
@@ -68,41 +66,36 @@ class SitoPelicula extends Component{
             if (data){
               this.setState({
                 peliculas: [...data.results],
-                imagenes: data.results,
                 paginaActual: numeroPagina
               })
             }
           })
       }
 
-      handleGuardarProducto(productId) {
+      handleGuardarPelicula(peliculaId) {
     
-        //busco el producto en mi lista de productos
-        let producto = this.state.products.find(elemProducto => elemProducto.id === productId);
-        let indexProducto = this.state.products.findIndex(x => x.id === producto.id)
+        //busco el pelicula en mi lista de productos
+        let pelicula = this.state.peliculas.find(elemPelicula => elemPelicula.id === peliculaId);
+        let indexPelicula = this.state.peliculas.findIndex(x => x.id === pelicula.id)
     
-        var productoCarrrito = {
-          id: producto.id,
-          nombre: producto.nombre,
-          img: producto.imagen,
-          precio: producto.precio,
-          cantidad: 1,
-          total: producto.precio
+        var peliculaVer = {
+          id: pelicula.id,
+          nombre: pelicula.title,
         }
-        //verifico si el producto esta o no en el carrito
-        var existe = this.state.carrito.find(elemProducto => elemProducto.id === productId)
+        //verifico si el pelicula esta o no en el listaPeliculas
+        var existe = this.state.listaPeliculas.find(elemPelicula => elemPelicula.id === peliculaId)
         if (undefined !== existe && existe !== null) {
-          let indexCarrito = this.state.carrito.findIndex(x => x.id === existe.id)
-          this.handlerAgregarProducto(indexCarrito, indexProducto)    
+          let indexListaPeliculas = this.state.listaPeliculas.findIndex(x => x.id === existe.id)
+          this.handlerAgregarProducto(indexListaPeliculas, indexPelicula)    
         }else{
           var copiaState = Object.assign({}, this.state);
-          copiaState.products[indexProducto].stock -= 1
+          copiaState.peliculas[indexPelicula].stock -= 1
           copiaState.total += 1
           this.setState({total: copiaState.total})
-          copiaState.sum += copiaState.products[indexProducto].precio
+          copiaState.sum += copiaState.peliculas[indexPelicula].precio
           this.setState({sum: copiaState.sum})
           this.setState({
-            carrito: this.state.carrito.concat([productoCarrrito]),
+            listaPeliculas: this.state.listaPeliculas.concat([peliculaVer]),
             copiaState
           })
         }

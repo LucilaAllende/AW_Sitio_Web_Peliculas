@@ -10,8 +10,10 @@ class Resultado extends Component{
         if(peliculas.length===0){
             return null;
         } 
-        console.log("IMAGENES")
-        console.log(peliculas);
+        //console.log("PELICULLLAAAAAS")
+        //console.log(peliculas);
+
+
 
         return (
             <React.Fragment>
@@ -27,6 +29,7 @@ class Resultado extends Component{
                             descripcion={pelicula.overview}
                             popularidad={pelicula.popularity}
                             puntuacion={pelicula.vote_average}
+                            handleGuardarPelicula={() => this.props.handleGuardarPelicula(pelicula.id)}
                             />
                         ))
                     }

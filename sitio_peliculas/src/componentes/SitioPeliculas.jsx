@@ -7,6 +7,7 @@ import {Grid} from 'semantic-ui-react';
 import './App.css'
 import 'react-pro-sidebar/dist/css/styles.css';
 import Sidebar from "react-sidebar";
+import { map } from 'jquery';
 // import MenuIcon from '@material-ui/icons/Menu';
 // import IconButton from '@material-ui/core/IconButton';
 // import Login from './Login'
@@ -23,9 +24,12 @@ class SitoPelicula extends Component{
           totalResultados: 0,
           paginaActual: 1,
           listaPeliculas: [],
+          prueba: [],
         }
         this.apiKey = process.env.REACT_APP_API
         this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleGuardarPelicula = this.handleGuardarPelicula.bind(this);
       }
       
       scroll =()=>{
@@ -92,13 +96,19 @@ class SitoPelicula extends Component{
           .then(data => data.json())
           .then(data => {
             if (data){
-              this.setState({
+              this.setState( {
                 peliculas: [...data.results],
+                prueba: data.results,
                 totalResultados: data.total_results
               })
             }
           })
+          console.log("PELICULAAAAAAS");
+          console.log(this.state.peliculas);
+          console.log("PELICULAAAAAAS");
+          console.log(this.state.prueba);
         }
+
       }
 
       handleChange = (e) => {
@@ -118,41 +128,44 @@ class SitoPelicula extends Component{
           })
       }
 
+
       handleGuardarPelicula(peliculaId) {
+
+        console.log("PELICULAAAAssssss")
+        console.log(this.state.peliculas)
     
         //busco el pelicula en mi lista de productos
         let pelicula = this.state.peliculas.find(elemPelicula => elemPelicula.id === peliculaId);
-        let indexPelicula = this.state.peliculas.findIndex(x => x.id === pelicula.id)
-    
+
+        console.log("PELICULAAAA")
+        console.log(pelicula)
+     
         var peliculaVer = {
           id: pelicula.id,
           nombre: pelicula.title,
-        }
+        } 
         //verifico si el pelicula esta o no en el listaPeliculas
         var existe = this.state.listaPeliculas.find(elemPelicula => elemPelicula.id === peliculaId)
-        if (undefined !== existe && existe !== null) {
-          let indexListaPeliculas = this.state.listaPeliculas.findIndex(x => x.id === existe.id)
-          this.handlerAgregarProducto(indexListaPeliculas, indexPelicula)    
+        console.log("EXSTEEE??")
+        console.log(existe)
+        if (existe !== undefined && existe !== null) {
+          
+            alert("Ya tiene esa peli")
         }else{
-          var copiaState = Object.assign({}, this.state);
-          copiaState.peliculas[indexPelicula].stock -= 1
-          copiaState.total += 1
-          this.setState({total: copiaState.total})
-          copiaState.sum += copiaState.peliculas[indexPelicula].precio
-          this.setState({sum: copiaState.sum})
+
           this.setState({
-            listaPeliculas: this.state.listaPeliculas.concat([peliculaVer]),
-            copiaState
-          })
+            listaPeliculas: this.state.listaPeliculas.concat([peliculaVer])
+          }) 
         }
-    
+        console.log("LIIIIISSSTAAAAA")
+        console.log(this.state.listaPeliculas)
       }
 
     render(){
         return (
             <>
             <Sidebar
-              sidebar={<Lista/>}
+              sidebar={ <b>Peliculas para ver </b>}
               open={this.state.sidebarOpen}
               onSetOpen={this.onSetSidebarOpen}
               styles={{ sidebar: { background: "white" } }}
@@ -163,10 +176,12 @@ class SitoPelicula extends Component{
             <Grid>
                 <Grid.Column className="col-12 fondo" >
                 <div className="row justify-content-center resultado">
+
                     <Resultado 
-                    peliculas={this.state.peliculas} 
                     paginaAnterior={this.paginaAnterior}
                     paginaSiguiente={this.paginaSiguiente}
+                    handleGuardarPelicula={this.handleGuardarPelicula}
+                    peliculas={this.state.peliculas} 
                     />
                 </div>                   
                 </Grid.Column>

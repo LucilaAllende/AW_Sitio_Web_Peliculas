@@ -17,7 +17,7 @@ const Pelicula = (props) =>{
                 <p><b>Fecha de estreno:</b> {props.estreno}</p>
                 <p><b>Lenguaje:</b> {props.lenguaje}</p>
                 <p><b>Descripción:</b> {props.descripcion}</p>
-                <Button variant="contained" color="primary" >
+                <Button variant="contained" color="primary" onClick={props.handleGuardarPelicula}>
                     Agregar a Mi Lista
                 </Button>
             </div>

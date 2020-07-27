@@ -22,7 +22,7 @@ const Paginacion = (props) => {
     return(
         <div className="container" >
             <div className="row">
-                <ul className="pagination">
+                <ul className="pagination paginacion">
                     {props.paginaActual > 1 ? <li className="waves-effect elemento-lista-paginacion-prev"   onClick={() => props.nextPage(props.paginaActual - 1)}><a href="#">Anterior</a></li> : ''}
                         {linksPaginas}
                     {props.paginaActual < props.paginas + 1 ? <li className="waves-effect elemento-lista-paginacion-next" onClick={() => props.nextPage(props.paginaActual + 1)}><a href="#">Siguiente</a></li> : ''}

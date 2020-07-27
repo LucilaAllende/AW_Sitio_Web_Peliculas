@@ -7,10 +7,9 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
-//import MenuItem from '@material-ui/core/MenuItem';
-
 import Login from './Login'
 import Registro from './Registro'
+import {useUser} from 'reactfire';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,19 +46,28 @@ export default function ButtonAppBar(props) {
     setAnchorR(null);
   };
 
+  const user = useUser();
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+
+           {
+            user &&
+            <IconButton
             onClick={()=>props.onSetSidebarOpen(true)} 
             edge="start" 
             className={classes.menuButton} 
             color="inherit" 
             aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
+            <Button 
+            aria-haspopup="true" 
+            onClick={()=>props.onSetSidebarOpen(true)}
+            color="inherit">Mi lista</Button> <MenuIcon />
+          </IconButton>}
+          
+          <Typography variant="h6" className={classes.title} align="center">
             Sitio Peliculas
           </Typography>
           <Button 

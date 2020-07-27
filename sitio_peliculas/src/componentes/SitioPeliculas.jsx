@@ -2,17 +2,14 @@ import React, {Component} from 'react';
 import Buscador from './Buscador';
 import BarraNavegacion from './BarraNavegacion';
 import Resultado from './Resultado'
-import {Grid} from 'semantic-ui-react';
+import {Grid, Card} from 'semantic-ui-react';
 import './App.css'
 import 'react-pro-sidebar/dist/css/styles.css';
 import Sidebar from "react-sidebar";
-// import MenuIcon from '@material-ui/icons/Menu';
-// import IconButton from '@material-ui/core/IconButton';
-// import Login from './Login'
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 
-class SitoPelicula extends Component{
+class SitioPeliculas extends Component{
     
     constructor(){
       super();
@@ -24,19 +21,12 @@ class SitoPelicula extends Component{
         totalResultados: 0,
         paginaActual: 1,
         listaPeliculas: [],
-        prueba: [],
       }
       this.apiKey = process.env.REACT_APP_API
       this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleGuardarPelicula = this.handleGuardarPelicula.bind(this);
-    }
-    // TODO : ¿ Deprecada ?
-    scroll =()=>{
-      const elemento= document.querySelector('.jumbotron');
-      console.timeLog("-----------------")
-      console.log(elemento)
-      elemento.scrollIntoView({block: "start", behavior: "smooth"});
+      
     }
 
     onSetSidebarOpen(open) {
@@ -52,15 +42,11 @@ class SitoPelicula extends Component{
           if (data){
             this.setState( {
               peliculas: [...data.results],
-              prueba: data.results,
               totalResultados: data.total_results
             })
           }
         })
-        console.log("PELICULAAAAAAS");
-        console.log(this.state.peliculas);
-        console.log("PELICULAAAAAAS");
-        console.log(this.state.prueba);
+
       }
     }
 
@@ -84,8 +70,6 @@ class SitoPelicula extends Component{
     handleGuardarPelicula(peliculaId) {
       //busco el pelicula en mi lista de productos
       let pelicula = this.state.peliculas.find(elemPelicula => elemPelicula.id === peliculaId);
-      console.log("Log - pelicula------------------")
-      console.log(pelicula)
       var peliculaVer = {
         id: pelicula.id,
         nombre: pelicula.title,
@@ -93,8 +77,6 @@ class SitoPelicula extends Component{
       } 
       //verifico si el pelicula esta o no en el listaPeliculas
       var existe = this.state.listaPeliculas.find(elemPelicula => elemPelicula.id === peliculaId)
-      console.log("Log - Existe?-------------------")
-      console.log(existe)
       if (existe !== undefined && existe !== null) {
           alert("Ya tiene esa peli")
       }else{
@@ -102,46 +84,63 @@ class SitoPelicula extends Component{
           listaPeliculas: this.state.listaPeliculas.concat([peliculaVer])
         }) 
       }
-      console.log("Log - lista de peliculas favoritas")
-      console.log(this.state.listaPeliculas)
+
       return this.state.listaPeliculas
     }
 
-    manejadorClickBorrarElementoListaFavoritos(){
-      alert("Implementar borrado de la pelicula de la lista de peliculas a ver.")
+    handleQuitarPelicula(peliculaId){
+      
+      let pelicula = this.state.listaPeliculas.find(elemPelicula => elemPelicula.id === peliculaId);
+      let indexPelicula = this.state.listaPeliculas.findIndex(x => x.id === pelicula.id)
 
+      if (pelicula !== undefined && pelicula !== null) {
+        this.state.listaPeliculas.splice(indexPelicula, 1)
+        this.forceUpdate();
+      }else{          
+          alert("Ups, usted no tiene esa pelicula en su lista")
+      } 
     }
 
 
     crearElementoListaSidebar(listaPeliculas){
       let paqueteHTML = []
       // Se agrega el titulo a la lista de favoritos.
-      if (paqueteHTML.length == 0){
-        paqueteHTML.push(<html>
-                          <div className="titulo-lista-fav">
-                            <h3>Peliculas Favoritas</h3>
+      if (paqueteHTML.length === 0){
+        paqueteHTML.push(
+                        <>
+                          <div className="titulo-lista-fav" >
+                            <h4>Peliculas</h4>
                           </div>
-                        </html>)
+
+                          <Card>
+                            <Card.Content>
+                              Usted no agrego peliculas aun.
+                            </Card.Content>
+                          </Card>
+                        </>
+                        )
       }
       // Se agrega una pelicula a la lista de favoritos.
       if (listaPeliculas != null){
-        console.log("Log - verificar lista ------")
-        console.log(listaPeliculas)
         for(let i = 0 ; i < listaPeliculas.length ; i++){
-          paqueteHTML.push(<html>
-                            <div className="container-pelicula-fav">
-                              <p className="waves-effect">
-                              <img src={`http://image.tmdb.org/t/p/w185${listaPeliculas[i].imagen}`}  style={{width: "30%", height: "30%"}}/>
-                                  {listaPeliculas[i].nombre} 
-                                  <IconButton aria-label="delete" className="btn-eliminar-lista-fav" onClick={this.manejadorClickBorrarElementoListaFavoritos}>
-                                    <DeleteIcon />
-                                  </IconButton>
-                              </p>
-                            </div>
-                            
-                            </html>)
+          paqueteHTML.push(
+                            <Card className="card-pelicula">
+                            <Card.Content>
+                                <Card.Header style={{fontSize: 18}}>
+                                  <p>{listaPeliculas[i].nombre}  </p>
+                                </Card.Header> 
+                                <img src={`http://image.tmdb.org/t/p/w185${listaPeliculas[i].imagen}`}  style={{width: "50%", height: "50%"}} alt="Photos"/>                                     
+                            </Card.Content>
+                            <Card.Content>
+                              <IconButton color="primary" aria-label="delete" className="btn-eliminar-lista-fav" onClick={()=>this.handleQuitarPelicula(listaPeliculas[i].id)}>
+                                  <DeleteIcon color="inherit"/>
+                                </IconButton>
+                            </Card.Content>
+                            </Card>
+                          )
         }
       }
+
       return paqueteHTML
     }
 
@@ -152,10 +151,10 @@ class SitoPelicula extends Component{
       return (
         <>
         <Sidebar
-          sidebar={listaSidebar}
+          sidebar={<b>{listaSidebar}</b>}
           open={this.state.sidebarOpen}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { background: "white" } }}
+          styles={{ sidebar: { background: "white", height: "100%" } }}
         >
         </Sidebar>
         <BarraNavegacion onSetSidebarOpen = {this.onSetSidebarOpen} />
@@ -179,4 +178,4 @@ class SitoPelicula extends Component{
     }
 }
 
-export default SitoPelicula;
+export default SitioPeliculas;

@@ -1,7 +1,10 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import {useUser} from 'reactfire';
 
 const Pelicula = (props) =>{
+    const user = useUser();
+
     return (
     <div className="col-md-4 col-sm-9 col-xs-9 col-md-6 col-lg-4 ">
         <div className="card">
@@ -17,9 +20,10 @@ const Pelicula = (props) =>{
                 <p><b>Fecha de estreno:</b> {props.estreno}</p>
                 <p><b>Lenguaje:</b> {props.lenguaje}</p>
                 <p><b>Descripción:</b> {props.descripcion}</p>
+                { user &&
                 <Button variant="contained" color="primary" onClick={props.handleGuardarPelicula}>
                     Agregar a Mi Lista
-                </Button>
+                </Button>}
             </div>
         </div>
         <br/>

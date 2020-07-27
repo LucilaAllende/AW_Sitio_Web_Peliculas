@@ -107,9 +107,17 @@ class SitioPeliculas extends Component{
       // Se agrega el titulo a la lista de favoritos.
       if (paqueteHTML.length === 0){
         paqueteHTML.push(
+                        <>
                           <div className="titulo-lista-fav" >
                             <h4>Peliculas</h4>
                           </div>
+
+                          <Card>
+                            <Card.Content>
+                              Usted no agrego peliculas aun.
+                            </Card.Content>
+                          </Card>
+                        </>
                         )
       }
       // Se agrega una pelicula a la lista de favoritos.
@@ -132,6 +140,7 @@ class SitioPeliculas extends Component{
                           )
         }
       }
+
       return paqueteHTML
     }
 

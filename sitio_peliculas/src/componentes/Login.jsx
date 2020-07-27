@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import 'firebase/auth';
+import {useFirebaseApp, useUser} from 'reactfire';
 import "./Login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const firebase = useFirebaseApp();
+  const user = useUser();
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -14,9 +18,24 @@ export default function Login() {
     event.preventDefault();
   }
 
+  const submit = async () => {
+    await firebase.auth().createUserWithEmailAndPassword(email, password);
+  }
+
+  const logout = async () => {
+    await firebase.auth().signOut();
+  }
+
+  const login = async () => {
+    await firebase.auth().signInWithEmailAndPassword(email, password);
+  }
+
   return (
     <div className="Login">
-      <form onSubmit={handleSubmit}>
+      
+      {
+        !user &&
+        <form onSubmit={handleSubmit}>
         <FormGroup controlId="email" bsSize="large">
           <FormLabel>Email</FormLabel>
           <FormControl
@@ -34,10 +53,22 @@ export default function Login() {
             type="password"
           />
         </FormGroup>
-        <Button block bsSize="large" disabled={!validateForm()} type="submit">
+        <Button block bsSize="large" disabled={!validateForm()} type="submit" onClick={submit}>
+          Crear cuenta
+        </Button>
+        <Button block bsSize="large" disabled={!validateForm()} type="submit" onClick={login}>
           Login
         </Button>
       </form>
+      }
+      {
+        user && 
+        <Button 
+        aria-controls="registrar-menu" 
+        aria-haspopup="true" 
+        onClick={logout}
+        color="inherit">Cerrar Sesion</Button>
+      }
     </div>
   );
 }

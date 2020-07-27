@@ -7,13 +7,12 @@ import {Grid} from 'semantic-ui-react';
 import './App.css'
 import 'react-pro-sidebar/dist/css/styles.css';
 import Sidebar from "react-sidebar";
-import { map } from 'jquery';
 // import MenuIcon from '@material-ui/icons/Menu';
 // import IconButton from '@material-ui/core/IconButton';
 // import Login from './Login'
 
 class SitoPelicula extends Component{
-  
+    
     constructor(){
         super();
         this.state={

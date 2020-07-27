@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -8,9 +8,17 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'; // Archivo CSS de
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js'; // Archivo Javascript de Bootstrap 4 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
+
+import {FirebaseAppProvider} from 'reactfire'
+import firebaseConfig from './firebase-config'
+
 ReactDOM.render(
   <React.StrictMode>
-    <SitioPeliculas/>
+    <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+      <Suspense fallback={'Conectando la app...'}>
+        <SitioPeliculas/>
+      </Suspense>
+    </FirebaseAppProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -66,12 +66,12 @@ export default function ButtonAppBar(props) {
             aria-controls="simple-menu" 
             aria-haspopup="true" 
             onClick={handleClickL}
-            color="inherit">Login</Button>
+            color="inherit">Usuario</Button>
           <Button 
             aria-controls="registrar-menu" 
             aria-haspopup="true" 
             onClick={handleClickR}
-            color="inherit">Registrarme</Button>
+            color="inherit"></Button>
           <Menu
             id="simple-menu"
             anchorEl={anchorL}

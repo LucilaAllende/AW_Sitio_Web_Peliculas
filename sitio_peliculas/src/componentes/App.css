@@ -32,6 +32,29 @@
   margin:auto;
 }
 
+.btn-eliminar-lista-fav{
+  flex: 1;
+  padding: 2px;
+  margin-right: 2px;
+
+}
+
+.titulo-lista-fav{
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+  text-align: center;
+  background-color: #a7bfec;
+}
+
+.container-pelicula-fav{
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  background-color: #5e85ce;
+}
+
 .elemento-lista-paginacion-prev{
   background: #e5e8e8;
   margin-left: 2px;

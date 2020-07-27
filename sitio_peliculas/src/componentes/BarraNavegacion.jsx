@@ -7,8 +7,6 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
-//import MenuItem from '@material-ui/core/MenuItem';
-
 import Login from './Login'
 import Registro from './Registro'
 
@@ -57,9 +55,12 @@ export default function ButtonAppBar(props) {
             className={classes.menuButton} 
             color="inherit" 
             aria-label="menu">
-            <MenuIcon />
+            <Button 
+            aria-haspopup="true" 
+            onClick={()=>props.onSetSidebarOpen(true)}
+            color="inherit">Mi lista</Button> <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} align="center">
             Sitio Peliculas
           </Typography>
           <Button 

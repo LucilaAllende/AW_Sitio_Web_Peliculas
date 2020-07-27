@@ -4,7 +4,7 @@ const Paginacion = (props) => {
     const linksPaginas = []
     
     let varCantidadPaginas = 0
-    let varCantidadPaginasRestantes = 0
+    //let varCantidadPaginasRestantes = 0
 
     if (props.paginas >= 20){
         varCantidadPaginas = 20
@@ -15,17 +15,17 @@ const Paginacion = (props) => {
     const cantidadPaginas = varCantidadPaginas
     // Se crean los elementos de cada pagina.
     for( let i=1 ; i<=cantidadPaginas ; i++ ){
-        let active = props.paginaActual == i ? 'active' : '';
-        linksPaginas.push(<li className={`waves-effect elemento-lista-paginacion ${active}`} key={i} onClick={() => props.nextPage(i)}><a href="#">{i}</a></li>)
+        let active = props.paginaActual === i ? 'active' : '';
+        linksPaginas.push(<li className={`waves-effect elemento-lista-paginacion ${active}`} key={i} onClick={() => props.nextPage(i)}><a href="/#">{i}</a></li>)
     }
 
     return(
         <div className="container" >
             <div className="row">
                 <ul className="pagination">
-                    {props.paginaActual > 1 ? <li className="waves-effect elemento-lista-paginacion-prev"   onClick={() => props.nextPage(props.paginaActual - 1)}><a href="#">Anterior</a></li> : ''}
+                    {props.paginaActual > 1 ? <li className="waves-effect elemento-lista-paginacion-prev"   onClick={() => props.nextPage(props.paginaActual - 1)}><a href="/#">Anterior</a></li> : ''}
                         {linksPaginas}
-                    {props.paginaActual < props.paginas + 1 ? <li className="waves-effect elemento-lista-paginacion-next" onClick={() => props.nextPage(props.paginaActual + 1)}><a href="#">Siguiente</a></li> : ''}
+                    {props.paginaActual < props.paginas + 1 ? <li className="waves-effect elemento-lista-paginacion-next" onClick={() => props.nextPage(props.paginaActual + 1)}><a href="/#">Siguiente</a></li> : ''}
                 </ul>
             </div>
         </div>

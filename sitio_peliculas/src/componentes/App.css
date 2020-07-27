@@ -44,7 +44,8 @@
   padding-bottom: 2px;
   margin-bottom: 2px;
   text-align: center;
-  background-color: #a7bfec;
+  color: #fff;
+  background-color:#3f51b5
 }
 
 .container-pelicula-fav{
@@ -116,4 +117,8 @@
 .menu-login{
   width: 200px;
   height: 350px;
+}
+
+.card-pelicula{
+  margin: 25px;
 }

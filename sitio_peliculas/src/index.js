@@ -3,23 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import SitioPeliculas from './componentes/SitioPeliculas';
-
+import {FirebaseAppProvider} from 'reactfire'
+import firebaseConfig from './firebase-config'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'; // Archivo CSS de Bootstrap 4 
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js'; // Archivo Javascript de Bootstrap 4 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
-
-import {FirebaseAppProvider} from 'reactfire'
-import firebaseConfig from './firebase-config'
-
 ReactDOM.render(
-  <React.StrictMode>
     <FirebaseAppProvider firebaseConfig={firebaseConfig}>
       <Suspense fallback={'Conectando la app...'}>
         <SitioPeliculas/>
       </Suspense>
-    </FirebaseAppProvider>
-  </React.StrictMode>,
+    </FirebaseAppProvider>,
   document.getElementById('root')
 );
 

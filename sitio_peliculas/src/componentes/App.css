@@ -122,3 +122,8 @@
 .card-pelicula{
   margin: 25px;
 }
+
+.btn-auth{
+  color: #fff;
+  background-color:#3f51b5
+}

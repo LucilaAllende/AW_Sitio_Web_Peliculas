@@ -6,9 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Menu from '@material-ui/core/Menu';
 import Login from './Login'
-import Registro from './Registro'
 import { useUser } from 'reactfire';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,27 +23,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar(props) {
   const classes = useStyles();
-
-  const [anchorL, setAnchorL] = React.useState(null);
-
-  const handleClickL = (event) => {
-    setAnchorL(event.currentTarget);
-  };
-
-  const handleCloseL = () => {
-    setAnchorL(null);
-  };
-
-  const [anchorR, setAnchorR] = React.useState(null);
-
-  const handleClickR = (event) => {
-    setAnchorR(event.currentTarget);
-  };
-
-  const handleCloseR = () => {
-    setAnchorR(null);
-  };
-
   const user = useUser();
 
   return (
@@ -70,34 +47,8 @@ export default function ButtonAppBar(props) {
           <Typography variant="h6" className={classes.title} align="center">
             Sitio Peliculas
           </Typography>
-          <Button
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={handleClickL}
-            color="inherit">Usuario</Button>
-          <Button
-            aria-controls="registrar-menu"
-            aria-haspopup="true"
-            onClick={handleClickR}
-            color="inherit"></Button>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorL}
-            keepMounted
-            open={Boolean(anchorL)}
-            onClose={handleCloseL}
-          >
-            <Login handleEstadoUsuario={props.handleEstadoUsuario} />
-          </Menu>
-          <Menu
-            id="registrar-menu"
-            anchorEl={anchorR}
-            keepMounted
-            open={Boolean(anchorR)}
-            onClose={handleCloseR}
-          >
-            <Registro />
-          </Menu>
+
+          <Login handleEstadoUsuario={props.handleEstadoUsuario} />
         </Toolbar>
       </AppBar>
     </div>

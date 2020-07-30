@@ -106,17 +106,11 @@ class SitioPeliculas extends Component {
           <div className="titulo-lista-fav" >
             <h4>Peliculas</h4>
           </div>
-
-          <Card>
-            <Card.Content>
-              Usted no agrego peliculas aun.
-            </Card.Content>
-          </Card>
         </>
       )
     }
     // Se agrega una pelicula a la lista de favoritos.
-    if (listaPeliculas != null) {
+    if (listaPeliculas.length !== 0) {
       for (let i = 0; i < listaPeliculas.length; i++) {
         paqueteHTML.push(
           <Card className="card-pelicula">
@@ -134,6 +128,15 @@ class SitioPeliculas extends Component {
           </Card>
         )
       }
+    }
+    else {
+      paqueteHTML.push(
+        <Card>
+          <Card.Content>
+            Usted no agrego peliculas aun.
+        </Card.Content>
+        </Card>
+      )
     }
     return paqueteHTML
   }
@@ -163,8 +166,6 @@ class SitioPeliculas extends Component {
             let peliculas = snapshot.val();
             let newState = [];
             for (let pelicula in peliculas) {
-              console.log("pelicula")
-              console.log(pelicula)
               newState.push({
                 id: pelicula,
                 idApi: peliculas[pelicula].idApi,

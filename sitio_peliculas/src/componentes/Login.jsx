@@ -22,17 +22,17 @@ export default function Login(props) {
   }
 
   return (
-    <div className="Login">
+    <div>
 
       {user ?
         <Button
-          aria-controls="registrar-menu"
+          className="btn-auth"
           aria-haspopup="true"
           onClick={logout}
           color="inherit">Cerrar Sesion</Button>
         :
         <Button
-          aria-controls="registrar-menu"
+          className="btn-auth"
           aria-haspopup="true"
           onClick={login}
           color="inherit">Iniciar Sesion</Button>

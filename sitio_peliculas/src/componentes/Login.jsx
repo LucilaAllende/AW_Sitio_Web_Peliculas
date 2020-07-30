@@ -23,13 +23,15 @@ export default function Login(props) {
 
   return (
     <div>
-
       {user ?
         <Button
           className="btn-auth"
           aria-haspopup="true"
+          align="right"
           onClick={logout}
-          color="inherit">Cerrar Sesion</Button>
+          color="inherit">
+          Cerrar Sesion
+          </Button>
         :
         <Button
           className="btn-auth"

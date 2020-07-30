@@ -125,5 +125,12 @@
 
 .btn-auth{
   color: #fff;
-  background-color:#3f51b5
+  background-color:#3f51b5;
+}
+
+.user-profile{
+  border-radius: 50%;
+  width: 5%;
+  height: 5%;
+  margin-left: 8px;
 }

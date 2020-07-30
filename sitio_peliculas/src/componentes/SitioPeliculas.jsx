@@ -17,9 +17,9 @@ class SitioPeliculas extends Component {
       termino: '',
       peliculas: [],
       pagina: '',
-      sidebarOpen: false,
       totalResultados: 0,
       paginaActual: 1,
+      sidebarOpen: false,
       listaPeliculas: [],
       usuario: null,
     }
@@ -28,7 +28,6 @@ class SitioPeliculas extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleGuardarPelicula = this.handleGuardarPelicula.bind(this);
     this.handleEstadoUsuario = this.handleEstadoUsuario.bind(this);
-
   }
 
   onSetSidebarOpen(open) {

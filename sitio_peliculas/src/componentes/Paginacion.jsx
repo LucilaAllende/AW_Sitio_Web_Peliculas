@@ -33,7 +33,7 @@ const Paginacion = (props) => {
                             <li
                                 className="waves-effect elemento-lista-paginacion-prev"
                                 onClick={() => props.nextPage(props.paginaActual - 1)}>
-                                <a className="btn" href="/#">Anterior</a>
+                                <a className="btn" href="/#">Previous</a>
                             </li> : ''
                         }
                         {linksPaginas}
@@ -41,7 +41,7 @@ const Paginacion = (props) => {
                             <li
                                 className="waves-effect elemento-lista-paginacion-next"
                                 onClick={() => props.nextPage(props.paginaActual + 1)}>
-                                <a className="btn" href="/#">Siguiente</a>
+                                <a className="btn" href="/#">Next</a>
                             </li> : ''
                         }
                     </ul>

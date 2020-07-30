@@ -96,51 +96,6 @@ class SitioPeliculas extends Component {
     itemRef.remove();
   }
 
-
-  crearElementoListaSidebar(listaPeliculas) {
-    let paqueteHTML = []
-    // Se agrega el titulo a la lista de favoritos.
-    if (paqueteHTML.length === 0) {
-      paqueteHTML.push(
-        <>
-          <div className="titulo-lista-fav" >
-            <h4>Peliculas</h4>
-          </div>
-        </>
-      )
-    }
-    // Se agrega una pelicula a la lista de favoritos.
-    if (listaPeliculas.length !== 0) {
-      for (let i = 0; i < listaPeliculas.length; i++) {
-        paqueteHTML.push(
-          <Card className="card-pelicula">
-            <Card.Content>
-              <Card.Header style={{ fontSize: 18 }}>
-                <p>{listaPeliculas[i].nombre}  </p>
-              </Card.Header>
-              <img src={`http://image.tmdb.org/t/p/w185${listaPeliculas[i].imagen}`} style={{ width: "50%", height: "50%" }} alt="Photos" />
-            </Card.Content>
-            <Card.Content>
-              <IconButton color="primary" aria-label="delete" className="btn-eliminar-lista-fav" onClick={() => this.handleQuitarPelicula(listaPeliculas[i].id, this.state.usuario.uid)}>
-                <DeleteIcon color="inherit" />
-              </IconButton>
-            </Card.Content>
-          </Card>
-        )
-      }
-    }
-    else {
-      paqueteHTML.push(
-        <Card>
-          <Card.Content>
-            Usted no agrego peliculas aun.
-        </Card.Content>
-        </Card>
-      )
-    }
-    return paqueteHTML
-  }
-
   handleEstadoUsuario(algo) {
     this.setState({
       usuario: algo
@@ -182,6 +137,52 @@ class SitioPeliculas extends Component {
       }
     });
   }
+
+  crearElementoListaSidebar(listaPeliculas) {
+    let paqueteHTML = []
+    // Se agrega el titulo a la lista de favoritos.
+    if (paqueteHTML.length === 0) {
+      paqueteHTML.push(
+        <>
+          <div className="titulo-lista-fav" >
+            <h4>Movies</h4>
+          </div>
+        </>
+      )
+    }
+    // Se agrega una pelicula a la lista de favoritos.
+    if (listaPeliculas.length !== 0) {
+      for (let i = 0; i < listaPeliculas.length; i++) {
+        paqueteHTML.push(
+          <Card className="card-pelicula">
+            <Card.Content>
+              <Card.Header style={{ fontSize: 18 }}>
+                <p>{listaPeliculas[i].nombre}  </p>
+              </Card.Header>
+              <img src={`http://image.tmdb.org/t/p/w185${listaPeliculas[i].imagen}`} style={{ width: "50%", height: "50%" }} alt="Photos" />
+            </Card.Content>
+            <Card.Content>
+              <IconButton color="primary" aria-label="delete" className="btn-eliminar-lista-fav" onClick={() => this.handleQuitarPelicula(listaPeliculas[i].id, this.state.usuario.uid)}>
+                <DeleteIcon color="inherit" />
+              </IconButton>
+            </Card.Content>
+          </Card>
+        )
+      }
+    }
+    else {
+      paqueteHTML.push(
+        <Card>
+          <Card.Content>
+            You haven't added movies yet.
+        </Card.Content>
+        </Card>
+      )
+    }
+    return paqueteHTML
+  }
+
+
 
   render() {
     const numeroPaginas = Math.floor(this.state.totalResultados / 20)

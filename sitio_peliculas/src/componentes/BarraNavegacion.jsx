@@ -41,11 +41,11 @@ export default function ButtonAppBar(props) {
               <Button
                 aria-haspopup="true"
                 onClick={() => props.onSetSidebarOpen(true)}
-                color="inherit">Mi lista</Button> <MenuIcon />
+                color="inherit">My list</Button> <MenuIcon />
             </IconButton>}
 
           <Typography variant="h6" className={classes.title} align="center">
-            Sitio Peliculas
+            The Movie Site
           </Typography>
 
           <Login handleEstadoUsuario={props.handleEstadoUsuario} />

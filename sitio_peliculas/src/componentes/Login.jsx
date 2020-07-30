@@ -30,14 +30,14 @@ export default function Login(props) {
           align="right"
           onClick={logout}
           color="inherit">
-          Cerrar Sesion
+          Sign out
           </Button>
         :
         <Button
           className="btn-auth"
           aria-haspopup="true"
           onClick={login}
-          color="inherit">Iniciar Sesion</Button>
+          color="inherit">Log in</Button>
       }
     </div>
   );

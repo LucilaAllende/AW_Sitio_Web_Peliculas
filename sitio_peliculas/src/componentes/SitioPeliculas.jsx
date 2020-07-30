@@ -81,7 +81,7 @@ class SitioPeliculas extends Component {
     //verifico si el pelicula esta o no en el listaPeliculas
     var existe = this.state.listaPeliculas.find(elemPelicula => elemPelicula.idApi === peliculaId)
     if (existe !== undefined && existe !== null) {
-      alert("Ya tiene esa peli")
+      alert("This movie has already been added to the list.")
     } else {
 
       const usuariosRef = firebase.database().ref(`/usuarios/${this.state.usuario.uid}`);

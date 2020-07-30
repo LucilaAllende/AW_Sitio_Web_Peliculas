@@ -1,7 +1,6 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import firebase from 'firebase'
 
- var firebaseConfig = {
+var firebaseConfig = {
   apiKey: "AIzaSyAjafn7mXYw_W6PlLctj0cNbu3VVN9gJj0",
   authDomain: "reactpeliculas.firebaseapp.com",
   databaseURL: "https://reactpeliculas.firebaseio.com",
@@ -12,10 +11,7 @@ import 'firebase/firestore'
   measurementId: "G-HFBJER9L5C"
 }
 
-// Initialize Firebase
-const fireb = firebase.initializeApp(firebaseConfig);
-
-// Get a reference to the database service
-//var database = firebase.database(); 
-
-export default fireb;
+firebase.initializeApp(firebaseConfig);
+export const provider = new firebase.auth.GoogleAuthProvider();
+export const auth = firebase.auth();
+export default firebase;

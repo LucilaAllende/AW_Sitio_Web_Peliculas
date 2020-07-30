@@ -9,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import Login from './Login'
 import Registro from './Registro'
-import {useUser} from 'reactfire';
+import { useUser } from 'reactfire';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,31 +53,31 @@ export default function ButtonAppBar(props) {
       <AppBar position="static">
         <Toolbar>
 
-           {
+          {
             user &&
             <IconButton
-            onClick={()=>props.onSetSidebarOpen(true)} 
-            edge="start" 
-            className={classes.menuButton} 
-            color="inherit" 
-            aria-label="menu">
-            <Button 
-            aria-haspopup="true" 
-            onClick={()=>props.onSetSidebarOpen(true)}
-            color="inherit">Mi lista</Button> <MenuIcon />
-          </IconButton>}
-          
+              onClick={() => props.onSetSidebarOpen(true)}
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu">
+              <Button
+                aria-haspopup="true"
+                onClick={() => props.onSetSidebarOpen(true)}
+                color="inherit">Mi lista</Button> <MenuIcon />
+            </IconButton>}
+
           <Typography variant="h6" className={classes.title} align="center">
             Sitio Peliculas
           </Typography>
-          <Button 
-            aria-controls="simple-menu" 
-            aria-haspopup="true" 
+          <Button
+            aria-controls="simple-menu"
+            aria-haspopup="true"
             onClick={handleClickL}
             color="inherit">Usuario</Button>
-          <Button 
-            aria-controls="registrar-menu" 
-            aria-haspopup="true" 
+          <Button
+            aria-controls="registrar-menu"
+            aria-haspopup="true"
             onClick={handleClickR}
             color="inherit"></Button>
           <Menu
@@ -87,7 +87,7 @@ export default function ButtonAppBar(props) {
             open={Boolean(anchorL)}
             onClose={handleCloseL}
           >
-              <Login/>
+            <Login handleEstadoUsuario={props.handleEstadoUsuario} />
           </Menu>
           <Menu
             id="registrar-menu"
@@ -96,7 +96,7 @@ export default function ButtonAppBar(props) {
             open={Boolean(anchorR)}
             onClose={handleCloseR}
           >
-              <Registro/>
+            <Registro />
           </Menu>
         </Toolbar>
       </AppBar>

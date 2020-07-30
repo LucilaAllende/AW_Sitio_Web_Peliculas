@@ -6,8 +6,8 @@ const Paginacion = (props) => {
     let varCantidadPaginas = 0
     //let varCantidadPaginasRestantes = 0
 
-    if (props.paginas >= 20) {
-        varCantidadPaginas = 20
+    if (props.paginas >= 8) {
+        varCantidadPaginas = 8
         //varCantidadPaginasRestantes = props.paginas + 1 - varCantidadPaginas
     } else {
         varCantidadPaginas = props.paginas + 1

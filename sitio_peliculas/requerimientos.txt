@@ -4,3 +4,6 @@ npm i jquery
 npm i semantic-ui-react
 npm install @material-ui/icons
 npm install @material-ui/core
+npm install firebase
+npm install reactfire@next
+npm install @material-ui/lab

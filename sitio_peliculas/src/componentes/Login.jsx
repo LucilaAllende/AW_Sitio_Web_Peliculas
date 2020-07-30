@@ -30,7 +30,7 @@ export default function Login(props) {
           align="right"
           onClick={logout}
           color="inherit">
-          Sign out
+          Log out
           </Button>
         :
         <Button

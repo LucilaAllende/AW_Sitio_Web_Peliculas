@@ -50,7 +50,7 @@ export default function ButtonAppBar(props) {
 
           <Login handleEstadoUsuario={props.handleEstadoUsuario} />
           {user &&
-            < img src={user.photoURL} alt="Perfil" className='user-profile' align="right" />
+            < img src={user.photoURL} alt="Profile" className='user-profile' align="right" />
           }
         </Toolbar>
       </AppBar>
